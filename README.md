@@ -13,6 +13,8 @@ AutoGLM 提供了核心的手机控制能力（iOS/Android），本工具在其�
 
 **AutoGLM UI Automation Controller** 是一款桌面图形化工具，专为 AutoGLM 设计，帮助用户更方便地进行手机 UI 自动化测试。
 
+<img width="2560" height="1438" alt="ScreenShot_2025-12-26_175722_671" src="https://github.com/user-attachments/assets/643780f6-dceb-4845-83e0-9006da6fb0a2" />
+
 ### 主要功能
 - 支持 iOS 和 Android 设备控制
 - 通过文本框或上传 Excel/CSV 文件批量执行测试用例
