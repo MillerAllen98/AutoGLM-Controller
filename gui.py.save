@@ -1,0 +1,148 @@
+import gradio as gr
+import subprocess
+import os
+
+configs = {
+    "智谱 BigModel": {
+        "base_url": "https://open.bigmodel.cn/api/paas/v4",
+        "model": "autoglm-phone",
+        "api_key": "sk-3f3f5d43e7e1b001b908fe0295eefe64.HBZFP6dZXiCYVRjB"  # ← 改成你的智谱Key
+    },
+    "ModelScope": {
+        "base_url": "https://api-inference.modelscope.cn/v1",
+        "model": "ZhipuAI/AutoGLM-Phone-9B",
+        "api_key": ""
+    }
+}
+
+def run_in_terminal(platform, user_key, task):
+    if not task.strip():
+        return "请输入任务指令！"
+    
+    api_key = user_key.strip() if user_key.strip() else configs[platform]["api_key"]
+    if not api_key:
+        return "请填写API Key！"
+    
+    cmd = (
+        f'python main.py '
+        f'--base-url {configs[platform]["base_url"]} '
+        f'--model {configs[platform]["model"]} '
+        f'--apikey "{api_key}" '
+        f'"{task.strip()}"'
+    )
+    
+    # macOS 原生弹 Terminal 并执行
+    applescript = f'''
+tell application "Terminal"
+    activate
+    do script "cd \\"{os.getcwd()}\\" && source venv/bin/activate && clear && echo '≡ AutoGLM 任务执行中 ≡' && echo '任务：{task.strip()}' && echo '════════════════════════════════════════════' && {cmd}"
+end tell
+'''
+    subprocess.run(["osascript", "-e", applescript])
+    
+    return f"已弹出 Terminal 窗口，正在执行：{task.strip()}"
+
+with gr.Blocks(title="AutoGLM · 一键开终端") as demo:
+    gr.Markdown("# AutoGLM 一键开终端版")
+    gr.Markdown("点按钮 → 立刻弹出真正的 macOS Terminal，日志原生实时显示！")
+
+    with gr.Row():
+        platform = gr.Dropdown(["智谱 BigModel", "ModelScope"], value="智谱 BigModel", label="平台")
+    
+    with gr.Row():
+        key_input = gr.Textbox(label="API Key（明文）", value=configs["智谱 BigModel"]["api_key"])
+    
+    task = gr.Textbox(label="任务指令", placeholder="例：打开美团搜索附近的火锅店", lines=3)
+    
+    run_btn = gr.Button("立刻弹出 Terminal 执行！", variant="primary", size="lg")
+    
+    status = gr.Textbox(label="状态", lines=3)
+    
+    gr.Examples([
+        ["打开微信，给文件传输助手发消息：一键终端成功！"],
+        ["打开美团搜索附近的火锅店"],
+        ["打开淘宝搜索iPhone 16"],
+    ], inputs=task)
+
+    run_btn.click(
+        fn=run_in_terminal,
+        inputs=[platform, key_input, task],
+        outputs=status
+    )
+
+demo.launch(inbrowser=True)import gradio as gr
+import subprocess
+import os
+
+# 配置两个平台
+configs = {
+    "智谱 BigModel": {
+        "base_url": "https://open.bigmodel.cn/api/paas/v4",
+        "model": "autoglm-phone",
+        "api_key": "sk-3f3f5d43e7e1b001b908fe0295eefe64.HBZFP6dZXiCYVRjB"  # 改成你的
+    },
+    "ModelScope": {
+        "base_url": "https://api-inference.modelscope.cn/v1",
+        "model": "ZhipuAI/AutoGLM-Phone-9B",
+        "api_key": ""
+    }
+}
+
+def run_in_terminal(platform, user_key, task):
+    if not task.strip():
+        return "请输入任务指令！"
+    
+    api_key = user_key.strip() if user_key.strip() else configs[platform]["api_key"]
+    if not api_key:
+        return "请填写API Key！"
+    
+    # 拼接命令
+    cmd = (
+        f'python main.py '
+        f'--base-url {configs[platform]["base_url"]} '
+        f'--model {configs[platform]["model"]} '
+        f'--apikey "{api_key}" '
+        f'"{task.strip()}"'
+    )
+    
+    # macOS 原生弹 Terminal 窗口运行命令
+    script = f'''
+tell application "Terminal"
+    activate
+    do script "cd {os.getcwd()} && source venv/bin/activate && clear && echo 'AutoGLM 正在执行：{task.strip()}' && echo '============================================' && {cmd}"
+end tell
+'''
+    subprocess.run(["osascript", "-e", script])
+    
+    return f"已弹出 Terminal 窗口，正在执行：{task.strip()}"
+
+with gr.Blocks(title="AutoGLM 终极控制台") as demo:
+    gr.Markdown("# AutoGLM 终极控制台")
+    gr.Markdown("点按钮 → 直接弹出真正的 Terminal，日志原生实时显示！")
+
+    with gr.Row():
+        platform = gr.Dropdown(["智谱 BigModel", "ModelScope"], value="智谱 BigModel", label="平台")
+    
+    with gr.Row():
+        key_input = gr.Textbox(label="API Key（明文）", value=configs["智谱 BigModel"]["api_key"])
+    
+    task = gr.Textbox(label="任务指令", placeholder="例：打开美团搜索附近的火锅店", lines=3)
+    
+    run_btn = gr.Button("立刻弹出 Terminal 执行！", variant="primary", size="lg")
+    
+    output = gr.Textbox(label="状态", lines=3)
+    
+    gr.Examples([
+        ["打开微信，给文件传输助手发消息：终极版成功！"],
+        ["打开美团搜索附近的火锅店"],
+        ["打开淘宝搜索iPhone 16 Pro Max"],
+        ["打开抖音连续下滑刷30秒"],
+    ], inputs=task)
+
+    run_btn.click(
+        fn=run_in_terminal,
+        inputs=[platform, key_input, task],
+        outputs=output
+    )
+
+demo.launch(inbrowser=True)

@@ -430,6 +430,14 @@ Examples:
         help="Maximum steps per task",
     )
 
+    # 新增：支持自定义 system prompt（用于严格模式）
+    parser.add_argument(
+        "--system-prompt",
+        type=str,
+        default=None,
+        help="Custom system prompt to override default behavior (e.g., force strict step-by-step execution)",
+    )
+
     # Device options
     parser.add_argument(
         "--device-id",
@@ -745,12 +753,17 @@ def main():
         sys.exit(1)
 
     # Create configurations and agent based on device type
+    # === 修改点：将自定义 system_prompt 传给 ModelConfig ===
     model_config = ModelConfig(
         base_url=args.base_url,
         model_name=args.model,
         api_key=args.apikey,
         lang=args.lang,
     )
+
+    # 兼容方式注入严格模式提示词
+    if args.system_prompt:
+        model_config.system_prompt = args.system_prompt  # 动态添加属性
 
     if device_type == DeviceType.IOS:
         # Create iOS agent
