@@ -70,8 +70,8 @@ python autoglm_IDE.py
 执行完成后，点击 **导出报告 (EXPORT)**，选择保存路径，即可生成 Excel 报告。
 
 ## 致谢
-再次感谢 [AutoGLM](https://github.com/THUDM/AutoGLM) 团队，没有你们的优秀工作，这个工具不可能诞生。
+再次感谢 [AutoGLM](https://github.com/zai-org/Open-AutoGLM/) 团队，没有你们的优秀工作，这个工具不可能诞生。
 
 欢迎 Star ⭐ 和 Fork，期待你的反馈与贡献！
 
-— MillerAllen98
+— MillerAllen
