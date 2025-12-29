@@ -2,10 +2,10 @@
 # AutoGLM UI 自动化工具
 
 **首先，向 AutoGLM 项目致以最诚挚的敬意！**  
-本工具基于强大的 [AutoGLM](https://github.com/THUDM/AutoGLM) 项目构建，感谢 AutoGLM 团队提供的优秀开源框架，让手机 UI 自动化变得如此简单高效。
+本工具基于强大的 [AutoGLM](https://github.com/zai-org/Open-AutoGLM/) 项目构建，感谢 AutoGLM 团队提供的优秀开源框架，让手机 UI 自动化变得如此简单高效。
 
 > 请先查看 AutoGLM 官方仓库，了解底层依赖的安装和使用方式（必须先完成这些步骤，本工具才能正常运行）：  
-> 👉 https://github.com/THUDM/AutoGLM
+> 👉 https://github.com/zai-org/Open-AutoGLM/
 
 AutoGLM 提供了核心的手机控制能力（iOS/Android），本工具在其基础上封装了图形化界面、测试用例管理、执行监控和 Excel 报告导出等功能，让测试工作更直观、高效。
 
@@ -32,7 +32,7 @@ AutoGLM 提供了核心的手机控制能力（iOS/Android），本工具在其�
 
 ### 1. 安装 AutoGLM 核心依赖（必须先完成）
 请严格按照官方教程操作：  
-https://github.com/THUDM/AutoGLM
+https://github.com/zai-org/Open-AutoGLM/
 
 主要步骤包括：
 - 安装 WebDriverAgent（iOS）
