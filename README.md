@@ -69,6 +69,10 @@ python autoglm_IDE.py
 ### 5. 导出报告
 执行完成后，点击 **导出报告 (EXPORT)**，选择保存路径，即可生成 Excel 报告。
 
+⚠️ 注意：本仓库目前包含 Open-AutoGLM 核心代码，仅供参考。
+推荐方式：删除 phone_agent 等文件夹后，只保留 GUI 部分，然后安装官方：
+pip install git+https://github.com/zai-org/Open-AutoGLM.git@main
+
 ## 致谢
 再次感谢 [AutoGLM](https://github.com/zai-org/Open-AutoGLM/) 团队，没有你们的优秀工作，这个工具不可能诞生。
 
